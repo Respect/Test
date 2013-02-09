@@ -3,7 +3,7 @@
   <name>Test</name>
   <channel>respect.li/pear</channel>
   <summary>At Respect we are serious about testing, this is Test the serious Project.</summary>
-  <description>Nothing lightweight about this one, this is hard core, industrial strength, heavy duty, special ops and probably where you will find magic seen NO WHERE else.</description>
+  <description>Hard core, industrial strength, heavy duty, special ops, NO limits, NO compromise, only the best is good enough for Test..</description>
   <lead>
     <name>Alexandre Gomes Gaigalas</name>
     <user/>
@@ -17,7 +17,7 @@
     <active>yes</active>
   </lead>
   <date>2013-02-10</date>
-  <time>00:56:32</time>
+  <time>01:10:51</time>
   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>

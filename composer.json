@@ -3,7 +3,7 @@
     "description": "At Respect we are serious about testing, this is Test the serious Project.",
     "version": "0.1.0",
     "type": "library",
-    "time": "2013-02-10 00:56:32",
+    "time": "2013-02-10 01:10:51",
     "homepage": "",
     "license": "BSD-3-Clause",
     "authors": [
@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Respect\\Test": "src\/"
+            "Respect\\Test": "library\/"
         }
     }
 }
