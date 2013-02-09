@@ -1,11 +1,11 @@
 {
-    "name": "Nickl\/Test",
-    "description": "Enter description here - provided as a courtesy by Respect\/Foundation",
+    "name": "Respect\/Test",
+    "description": "At Respect we are serious about testing, this is Test the serious Project.",
     "version": "0.1.0",
     "type": "library",
-    "time": "2013-02-10 00:39:34",
+    "time": "2013-02-10 00:56:32",
     "homepage": "",
-    "license": "BSD-4-Clause",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Alexandre Gomes Gaigalas",
@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Nickl\\Test": "src\/"
+            "Respect\\Test": "src\/"
         }
     }
 }

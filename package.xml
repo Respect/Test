@@ -17,7 +17,7 @@
     <active>yes</active>
   </lead>
   <date>2013-02-10</date>
-  <time>00:55:17</time>
+  <time>00:56:32</time>
   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>
@@ -31,7 +31,7 @@
   <contents>
     <dir name="/">
       <file name="tests/bootstrap.php" role="test" md5sum="93503ceed4cc54a2a52fd7c73d040f58"/>
-      <file name="tests/phpunit.xml" role="test" md5sum="b504417b090b96706510b6cf99f6c0bc"/>
+      <file name="tests/phpunit.xml" role="test" md5sum="5c7a76de96df011d2e0a92028104a23b"/>
     </dir>
   </contents>
   <dependencies>
