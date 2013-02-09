@@ -1,0 +1,24 @@
+{
+    "name": "Nickl\/Test",
+    "description": "Enter description here - provided as a courtesy by Respect\/Foundation",
+    "version": "0.1.0",
+    "type": "library",
+    "time": "2013-02-10 00:39:34",
+    "homepage": "",
+    "license": "BSD-4-Clause",
+    "authors": [
+        {
+            "name": "Alexandre Gomes Gaigalas",
+            "email": "alexandre@gaigalas.net"
+        },
+        {
+            "name": "Nick Lombard",
+            "email": "github@jigsoft.co.za"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Nickl\\Test": "src\/"
+        }
+    }
+}

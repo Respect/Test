@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.10" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0               http://pear.php.net/dtd/tasks-1.0.xsd               http://pear.php.net/dtd/package-2.0               http://pear.php.net/dtd/package-2.0.xsd">
+  <name>Test</name>
+  <channel>respect.github.com/pear</channel>
+  <summary>Enter description here - provided as a courtesy by Respect/Foundation</summary>
+  <description>Enter description here - provided as a courtesy by Respect/Foundation</description>
+  <lead>
+    <name>Alexandre Gomes Gaigalas</name>
+    <user/>
+    <email>alexandre@gaigalas.net</email>
+    <active>yes</active>
+  </lead>
+  <lead>
+    <name>Nick Lombard</name>
+    <user/>
+    <email>github@jigsoft.co.za</email>
+    <active>yes</active>
+  </lead>
+  <date>2013-02-10</date>
+  <time>00:39:34</time>
+  <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+  </version>
+  <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+  </stability>
+  <license>BSD-4-Clause</license>
+  <notes>-</notes>
+  <contents>
+    <dir name="/">
+      <file name="tests/bootstrap.php" role="test" md5sum="93503ceed4cc54a2a52fd7c73d040f58"/>
+      <file name="tests/phpunit.xml" role="test" md5sum="b504417b090b96706510b6cf99f6c0bc"/>
+    </dir>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.3</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.1</min>
+      </pearinstaller>
+    </required>
+  </dependencies>
+  <phprelease>
+    <filelist>
+      <install name="tests/bootstrap.php" as="bootstrap.php"/>
+      <install name="tests/phpunit.xml" as="phpunit.xml"/>
+    </filelist>
+  </phprelease>
+</package>
