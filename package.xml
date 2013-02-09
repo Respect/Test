@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.10" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0               http://pear.php.net/dtd/tasks-1.0.xsd               http://pear.php.net/dtd/package-2.0               http://pear.php.net/dtd/package-2.0.xsd">
   <name>Test</name>
-  <channel>respect.github.com/pear</channel>
-  <summary>Enter description here - provided as a courtesy by Respect/Foundation</summary>
-  <description>Enter description here - provided as a courtesy by Respect/Foundation</description>
+  <channel>respect.li/pear</channel>
+  <summary>At Respect we are serious about testing, this is Test the serious Project.</summary>
+  <description>Nothing lightweight about this one, this is hard core, industrial strength, heavy duty, special ops and probably where you will find magic seen NO WHERE else.</description>
   <lead>
     <name>Alexandre Gomes Gaigalas</name>
     <user/>
@@ -17,7 +17,7 @@
     <active>yes</active>
   </lead>
   <date>2013-02-10</date>
-  <time>00:39:34</time>
+  <time>00:55:17</time>
   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>
@@ -26,7 +26,7 @@
     <release>alpha</release>
     <api>alpha</api>
   </stability>
-  <license>BSD-4-Clause</license>
+  <license>BSD-3-Clause</license>
   <notes>-</notes>
   <contents>
     <dir name="/">
