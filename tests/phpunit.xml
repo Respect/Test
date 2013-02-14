@@ -20,7 +20,7 @@
          verbose="false">
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../src/Respect/</directory>
+            <directory suffix=".php">../library/Respect/</directory>
         </whitelist>
     </filter>
     <testsuite name="Respect/Test Test Suite">
