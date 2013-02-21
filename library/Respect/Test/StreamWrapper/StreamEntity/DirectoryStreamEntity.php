@@ -3,11 +3,12 @@ namespace Respect\Test\StreamWrapper\StreamEntity;
 
 class DirectoryStreamEntity extends StreamEntity
 {
-    public function getStat($stat=null)
+    protected   $type  = 0040000,
+                $perms = 0777;
+
+    public function getSize()
     {
-        if (($stat['mode'] & 0170000) == 32768)
-            $stat['mode'] -= 16384;
-        $stat['size'] = 0;
-        return $stat;
+        return 0;
     }
+
 }

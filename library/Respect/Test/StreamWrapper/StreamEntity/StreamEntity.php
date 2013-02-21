@@ -3,24 +3,57 @@ namespace Respect\Test\StreamWrapper\StreamEntity;
 
 use Exception;
 
-class StreamEntity
+abstract class StreamEntity
 {
-    protected $resource,
-        $path,
-        $data,
-        $open  = false,
-        $mode  = 'w+b',
-        $uri   = 'data:text/plain;base64,';
+    protected   $resource,
+                $type,
+                $path,
+                $data,
+                $atime,
+                $mtime,
+                $ctime,
+                $size  = 0,
+                $perms = 0000,
+                $umask = 0022,
+                $open  = false,
+                $mode  = 'w+b',
+                $uri   = 'data:text/plain;base64,';
+
+    abstract public function getSize();
+
+    public function __construct()
+    {
+        $time = time();
+        $this->setAtime($time);
+        $this->setCtime($time);
+        $this->setMtime($time);
+    }
 
     public function openResource()
     {
         $this->setResource(fopen($this->getDataUri(),$this->getMode()));
         $this->setOpen(!is_null($this->getResource()));
     }
-    public function getStat($stat=null)
+
+    public function getStat()
     {
-        return $stat;
+        $stat = array('dev'     => 0,
+                      'ino'     => 0,
+                      'mode'    => $this->getType() | $this->getPermissions(),
+                      'nlink'   => 0,
+                      'uid'     => $this->getUid(),
+                      'gid'     => $this->getGid(),
+                      'rdev'    => 0,
+                      'size'    => $this->getSize(),
+                      'atime'   => $this->getAtime(),
+                      'mtime'   => $this->getMtime(),
+                      'ctime'   => $this->getCtime(),
+                      'blksize' => -1,
+                      'blocks'  => -1
+        );
+        return array_merge(array_values($stat), $stat);
     }
+
     public function closeResource()
     {
         if ($this->isOpen() && fclose($this->getResource()))
@@ -29,6 +62,7 @@ class StreamEntity
             throw new Exception("Unable to release the ".get_called_class()." resource.");
         $this->setOpen(!is_null($this->getResource()));
     }
+
     public function setOpen($open)
     {
         $this->open = $open;
@@ -104,5 +138,78 @@ class StreamEntity
     public function getResource()
     {
         return $this->resource;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getPermissions()
+    {
+        return $this->getPerms() & ~$this->getUmask();
+    }
+
+    public function setPerms($perms)
+    {
+        $this->perms = $perms;
+    }
+
+    public function getPerms()
+    {
+        return $this->perms;
+    }
+
+    public function setUmask($umask)
+    {
+        $this->umask = $umask;
+    }
+
+    public function getUmask()
+    {
+        return $this->umask;
+    }
+
+    public function setAtime($atime)
+    {
+        $this->atime = $atime;
+    }
+
+    public function getAtime()
+    {
+        return $this->atime;
+    }
+
+    public function setCtime($ctime)
+    {
+        $this->ctime = $ctime;
+    }
+
+    public function getCtime()
+    {
+        return $this->ctime;
+    }
+
+    public function setMtime($mtime)
+    {
+        $this->mtime = $mtime;
+    }
+
+    public function getMtime()
+    {
+        return $this->mtime;
+    }
+
+    public function getUid() {
+        return function_exists('posix_getuid') ? posix_getuid() : getmyuid();
+    }
+
+    public function getGid() {
+        return function_exists('posix_getgid') ? posix_getgid() : getmygid();
     }
 }
