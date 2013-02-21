@@ -191,12 +191,11 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     public function dir_opendir($path, $options)
     {
-        if (!is_null($this->resource))
-            $this->dir_closedir();
-        if (false !== $res = $this->getResource($path)) {
+        if ($this->getResource($path)) {
             $this->dir_rewinddir();
-            return $res;
+            return $this->resource;
         }
+
         $this->restore();
         $this->resource = opendir($path) ?: null;
         return $this->register($this->resource);
