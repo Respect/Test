@@ -31,8 +31,8 @@ abstract class StreamEntity
 
     public function openResource()
     {
-        $this->setResource(fopen($this->getDataUri(),$this->getMode()));
-        $this->setOpen(!is_null($this->getResource()));
+        $this->setResource(fopen($this->getDataUri(), $this->getMode()));
+        $this->setOpen(is_resource($this->getResource()));
     }
 
     public function getStat()
@@ -60,7 +60,7 @@ abstract class StreamEntity
             $this->setResource(null);
         else
             throw new Exception("Unable to release the ".get_called_class()." resource.");
-        $this->setOpen(!is_null($this->getResource()));
+        $this->setOpen(is_resource($this->getResource()));
     }
 
     public function setOpen($open)
@@ -70,7 +70,7 @@ abstract class StreamEntity
 
     public function setMode($mode)
     {
-        $this->mode = $mode;
+        $this->mode = $mode ?: 'w+b';
     }
 
     public function getMode()
