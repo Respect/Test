@@ -32,11 +32,8 @@ class DirectoryStreamEntityTest extends StreamEntityTest
      */
     public function testGetStat()
     {
-        $stat = null;
-        $expected = array('size' => 0);
-        $result = $this->object->getStat($stat);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $result = $this->object->getStat();
+        $this->assertEquals(0, $result['size']);
+        parent::testGetStat();
     }
 }
