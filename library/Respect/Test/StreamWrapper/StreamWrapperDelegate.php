@@ -171,12 +171,14 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     public function url_stat($path, $flags)
     {
-        if ($this->getResource($path))
-            return $this->stream_stat();
+        if ($this->isOverride($path))
+            return $this->stream_overrides[$path]->getStat();
+
         $this->restore();
         if (STREAM_URL_STAT_LINK == $flags)
             return $this->register(lstat($path));
         static::$quiet = $flags;
+
         return $this->register(stat($path));
     }
 
