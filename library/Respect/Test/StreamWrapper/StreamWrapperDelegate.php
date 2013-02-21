@@ -316,6 +316,9 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     public function stream_write($data)
     {
+        if (is_object($this->stream_entity))
+            $this->stream_entity->setData($data);
+
         return fwrite($this->resource, $data);
     }
 
