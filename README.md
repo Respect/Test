@@ -12,7 +12,7 @@ To simplify our testing routines these tools came to be, now you
 too can benefit from these labours and have an inside look at why
 we think tests are so cool.
 
-> As more items are included this document will take shape, eventually
+As more items are included this document will take shape, eventually
 seeing this paragraph disappear along with the whitespace. Feel free
 to become part of yet another awesome project at Respect.
 
@@ -71,15 +71,17 @@ The file contents can be as simple as a string or as complicated as
 mapping a complete resource as content provider.
 
 ```php
-StreamWrapper::setStreamOverrides(array(
-  'virtual/foo-bar-baz.ini' => $my_foo_here_doclet,
-  'virtual/happy-panda.ini' => "panda=happy\nhappy=panda",
 
-  'virtual/custom-stream.ini'=> fopen('data:text/plain;base64,'.
-           urlencode('Sweet like a lemon'), 'wb'),
-  'virtual/custom-stream-base64.ini'=> fopen('data:text/plain;base64,'.
-           base64_encode('Sweet like a lemon'), 'wb'),
-));
+    StreamWrapper::setStreamOverrides(array(
+      'virtual/foo-bar-baz.ini' => $my_foo_here_doclet,
+      'virtual/happy-panda.ini' => "panda=happy\nhappy=panda",
+
+      'virtual/custom-stream.ini'=> fopen('data:text/plain;base64,'.
+               urlencode('Sweet like a lemon'), 'wb'),
+      'virtual/custom-stream-base64.ini'=> fopen('data:text/plain;base64,'.
+               base64_encode('Sweet like a lemon'), 'wb'),
+    ));
+
 ```
 
 StreamWrapper takes care of its own business so you dan't have to.
@@ -91,7 +93,9 @@ To enable a bare bone wirtual filesystem with no startup files
 simply use an empty array.
 
 ```php
-StreamWrapper::setStreamOverrides(array());
+
+    StreamWrapper::setStreamOverrides(array());
+
 ```
 
 You can keep repeating this process and everytime StreamWrapper will purge
@@ -112,68 +116,78 @@ at any location` as content at: `it/doesnt/matter/if/path/not/exist.txt` relatii
 to the current working directory.
 
 ```php
-file_put_contents('it/doesnt/matter/if/path/not/exist.txt',
-   'The file will be created and accessible at the location');
 
-print_r(file('it/doesnt/matter/if/path/not/exist.txt'));
+    file_put_contents('it/doesnt/matter/if/path/not/exist.txt',
+       'The file will be created and accessible at the location');
+
+    print_r(file('it/doesnt/matter/if/path/not/exist.txt'));
+
 ```
 
 ```
-Array
-(
-    [0] => The file will be created and accessible at the location
-)
+
+    Array
+    (
+        [0] => The file will be created and accessible at the location
+    )
+
 ```
 
 But you also get all the directories, fully traversable, inbetween.
 
 ```php
-function traverse($path) {
-    echo "$path \$\n":
-    foreach (new DirectoryIterator($path) as $i) {
-        echo $i->getBasename(), PHP_EOL;
-        if (!$i->isDot())
-            if ($i->isDir())
-                traverse($i->getPathname());
-            else
-                break;
+
+    function traverse($path) {
+        echo "$path \$\n":
+        foreach (new DirectoryIterator($path) as $i) {
+            echo $i->getBasename(), PHP_EOL;
+            if (!$i->isDot())
+                if ($i->isDir())
+                    traverse($i->getPathname());
+                else
+                    break;
+        }
     }
-}
 
-traverse('it');
-```
+    traverse('it');
 
 ```
-it $
-.
-..
-doesnt
-it/doesnt $
-.
-..
-matter
-it/doesnt/matter $
-.
-..
-if
-it/doesnt/matter/if $
-.
-..
-path
-it/doesnt/matter/if/path $
-.
-..
-not
-it/doesnt/matter/if/path/not $
-.
-..
-exist.txt
+
+```
+
+    it $
+    .
+    ..
+    doesnt
+    it/doesnt $
+    .
+    ..
+    matter
+    it/doesnt/matter $
+    .
+    ..
+    if
+    it/doesnt/matter/if $
+    .
+    ..
+    path
+    it/doesnt/matter/if/path $
+    .
+    ..
+    not
+    it/doesnt/matter/if/path/not $
+    .
+    ..
+    exist.txt
+
 ```
 
 Too good to be true, sure, lets see what the shell says outside of PHP.
 ```
+
 $ ls it
-ls: it: No such file or directory
+    ls: it: No such file or directory
+
 ```
 
 ### Usage like nothing has changed
@@ -187,34 +201,42 @@ resources as before.
 
 
 ```php
-var_dump(scandir('tests'));
+
+    var_dump(scandir('tests'));
+
 ```
 
 ```
-array(5) {
-  [0] =>
-  string(1) "."
-  [1] =>
-  string(2) ".."
-  [2] =>
-  string(13) "bootstrap.php"
-  [3] =>
-  string(7) "library"
-  [4] =>
-  string(11) "phpunit.xml"
-}
+
+    array(5) {
+      [0] =>
+      string(1) "."
+      [1] =>
+      string(2) ".."
+      [2] =>
+      string(13) "bootstrap.php"
+      [3] =>
+      string(7) "library"
+      [4] =>
+      string(11) "phpunit.xml"
+    }
+
 ```
 
 ```php
-echo file_get_contents('tests/phpunit.xml');
+
+    echo file_get_contents('tests/phpunit.xml');
+
 ```
 
 ```
-<!-- a Courtesy of Respect/Foundation -->
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         bootstrap="bootstrap.php"
-....
+
+    <!-- a Courtesy of Respect/Foundation -->
+    <phpunit backupGlobals="false"
+             backupStaticAttributes="false"
+             bootstrap="bootstrap.php"
+    ....
+
 ```
 ### Interface method 2
 
@@ -223,7 +245,9 @@ after a session in virtual land and this is what the methoi
 `releaseOverrides` are for.
 
 ```php
-StreamWrapper::releaseOverrides();
+
+    StreamWrapper::releaseOverrides();
+
 ```
 
 We simply release the reference handle and allow StreamWrapper to start
@@ -234,7 +258,9 @@ default file system again, you may insist that the standard stream wrapper
 be restored immediately by calling the PHP function:
 
 ```php
-stream_wrapper_restore('file');
+
+    stream_wrapper_restore('file');
+
 ```
 
 But this is not a requirement, all things will go back to normal once more.
