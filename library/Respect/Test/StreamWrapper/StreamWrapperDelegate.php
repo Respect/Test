@@ -20,9 +20,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
         $this->stream_overrides = $overrides;
         $this->registered_cLass = $class;
         $this->register();
-        if (is_null(static::$error_handler))
-            if (print __CLASS__. ', errorHandler')
-            static::$error_handler = set_error_handler(array(__CLASS__, 'errorHandler'));
+        static::$error_handler = set_error_handler(array(__CLASS__, 'errorHandler'));
         clearstatcache(true);
     }
 
