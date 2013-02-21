@@ -58,13 +58,27 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     private function fullyQualified(&$path)
     {
+        $ds = DIRECTORY_SEPARATOR;
         if (false !== $rp = realpath($path))
             return $path = $rp;
-        if (false !== strpos($path, '~') && isset($_SERVER['HOME']))
-            $path = str_replace('~', $_SERVER['HOME'], $path);
-        if ($path = rtrim($path, DIRECTORY_SEPARATOR))
-            if (false === strpos($path, getcwd()))
-                $path = getcwd().DIRECTORY_SEPARATOR.$path;
+        if ($path{0} == '~' && isset($_SERVER['HOME']))
+            $path = preg_replace('/^~/', $_SERVER['HOME'], $path);
+        $path = preg_replace('#'.$ds.$ds.'#', $ds, $path);
+        while (preg_match('#[^'.$ds.'\.]+'.$ds.'\.\.'.$ds.'#', $path))
+            $path = preg_replace('#[^'.$ds.'\.]+'.$ds.'\.\.'.$ds.'#', '', $path);
+        $path = preg_replace('#([^'.$ds.'\.]+'.$ds.')\.'.$ds.'#', '\1', $path);
+        $cwd = getcwd();
+        if ($path = rtrim($path, '.'.$ds))
+            if ($path{0} != $ds) {
+                if ($path{0} == '.') {
+                    while (preg_match('/^\.\./', $path)) {
+                        $path = preg_replace('#^\.\.'.$ds.'#', '', $path);
+                        $cwd = preg_replace('#'.$ds.'[^'.$ds.']+$#', '', $cwd);
+                    }
+                    $path = ltrim($path, '.'.$ds);
+                }
+                $path = "$cwd$ds$path";
+            }
         return $path;
     }
 
