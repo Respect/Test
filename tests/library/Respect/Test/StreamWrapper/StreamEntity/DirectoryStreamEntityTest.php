@@ -1,10 +1,11 @@
 <?php
 namespace Respect\Test\StreamWrapper\StreamEntity;
+include_once __DIR__.'/StreamEntityTest.php';
 
 /**
  * @covers Respect\Test\StreamWrapper\StreamEntity\DirectoryStreamEntity
  */
-class DirectoryStreamEntityTest extends \PHPUnit_Framework_TestCase
+class DirectoryStreamEntityTest extends StreamEntityTest
 {
     /**
      * @var DirectoryStreamEntity local instance
