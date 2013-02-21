@@ -31,11 +31,9 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpenResource()
     {
-        $expected = '';
-        $result = $this->object->openResource();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getResource());
+        $this->object->openResource();
+        $this->assertNotNull($this->object->getResource());
     }
 
     /**
@@ -43,13 +41,8 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetStat()
     {
-        $stat = null;
-        $expected = '';
-        $result = $this->object->getStat($stat);
-        print_r($result);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $result = $this->object->getStat();
+        $this->assertEquals(26, count($result));
     }
 
     /**
@@ -78,12 +71,11 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOpen()
     {
-        $open = null;
-        $expected = '';
-        $result = $this->object->setOpen($open);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertFalse($this->object->isOpen());
+        $this->object->setOpen(true);
+        $this->assertTrue($this->object->isOpen());
+        $this->object->setOpen(false);
+        $this->assertFalse($this->object->isOpen());
     }
 
     /**
@@ -91,12 +83,9 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMode()
     {
-        $mode = null;
-        $expected = '';
-        $result = $this->object->setMode($mode);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertEquals('w+b', $this->object->getMode());
+        $this->object->setMode('panda');
+        $this->assertEquals('panda', $this->object->getMode());
     }
 
     /**
@@ -104,11 +93,7 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMode()
     {
-        $expected = 'w+b';
-        $result = $this->object->getMode();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertEquals('w+b', $this->object->getMode());
     }
 
     /**
@@ -116,11 +101,7 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsOpen()
     {
-        $expected = '';
-        $result = $this->object->isOpen();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertFalse($this->object->isOpen());
     }
 
     /**
@@ -128,12 +109,9 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetData()
     {
-        $data = null;
-        $expected = '';
-        $result = $this->object->setData($data);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getData());
+        $this->object->setData('panda');
+        $this->assertEquals('panda', $this->object->getData());
     }
 
     /**
@@ -141,11 +119,7 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetData()
     {
-        $expected = '';
-        $result = $this->object->getData();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getData());
     }
 
     /**
@@ -153,11 +127,10 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDataEncoded()
     {
-        $expected = '';
+        $expected = 'cGFuZGE=';
+        $this->object->setData('panda');
         $result = $this->object->getDataEncoded();
         $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
     }
 
     /**
@@ -165,12 +138,13 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetUri()
     {
-        $uri = null;
-        $expected = '';
-        $result = $this->object->setUri($uri);
+        $expected = 'data:text/plain;base64,';
+        $result = $this->object->getUri();
         $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $uri = 'panda';
+        $this->object->setUri($uri);
+        $result = $this->object->getUri();
+        $this->assertEquals($uri, $result);
     }
 
     /**
@@ -181,8 +155,6 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
         $expected = 'data:text/plain;base64,';
         $result = $this->object->getDataUri();
         $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
     }
 
     /**
@@ -193,8 +165,6 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
         $expected = 'data:text/plain;base64,';
         $result = $this->object->getUri();
         $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
     }
 
     /**
@@ -202,12 +172,18 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetPath()
     {
-        $path = null;
-        $expected = '';
-        $result = $this->object->setPath($path);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getPath());
+        $expected = getcwd().DIRECTORY_SEPARATOR.'panda';
+        $path = 'panda';
+        $this->object->setPath($path);
+        $this->assertEquals($expected, $this->object->getPath());
+        $expected = $_SERVER['HOME'].DIRECTORY_SEPARATOR.'panda';
+        $path = '~/panda';
+        $this->object->setPath($path);
+        $this->assertEquals($expected, $this->object->getPath());
+        $expected = $path = '/panda';
+        $this->object->setPath($path);
+        $this->assertEquals($expected, $this->object->getPath());
     }
 
     /**
@@ -215,11 +191,7 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPath()
     {
-        $expected = '';
-        $result = $this->object->getPath();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getPath());
     }
 
     /**
@@ -227,12 +199,10 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetResource()
     {
-        $resource = null;
-        $expected = '';
-        $result = $this->object->setResource($resource);
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getResource());
+        $resource = $expected = fopen($this->object->getDataUri(), $this->testGetMode());
+        $this->object->setResource($resource);
+        $this->assertEquals($expected, $this->object->getResource());
     }
 
     /**
@@ -240,10 +210,6 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetResource()
     {
-        $expected = '';
-        $result = $this->object->getResource();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getResource());
     }
 }
