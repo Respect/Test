@@ -107,6 +107,8 @@ class StreamWrapperDelegate implements StreamWrapperInterface
     }
 
     private function openNewFile($path, $mode, $options, &$opened_path) {
+        if (preg_match('/^rb$|^r$/', $mode))
+            return false;
         $e = new FileStreamEntity();
         $e->setPath($path);
         $e->setData('');
