@@ -56,14 +56,15 @@ class StreamWrapper
     protected function delegate($method, $arguments)
     {
         if (array_key_exists($method, static::$methods))
-            try {
+            if(($required = static::$methods[$method]->getNumberOfRequiredParameters())
+                != ($count = count($arguments)))
+                throw new InvalidArgumentException("Invalid number of required arguments for method " .
+                    "$method, expected $required but found $count.");
+            else
                 return static::$methods[$method]->invokeArgs(
                     static::$wrapper,
                     $arguments
                 );
-            } catch (Exception $e) {
-                throw $e;
-            }
         else
             throw new Exception("No method implemented for $method");
     }
