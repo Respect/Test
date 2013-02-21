@@ -197,6 +197,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
         }
 
         $this->restore();
+        $this->stream_entity = null;
         $this->resource = opendir($path) ?: null;
         return $this->register($this->resource);
     }
