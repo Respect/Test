@@ -84,14 +84,16 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     private function isOverride(&$path = false)
     {
-        if (!$path && is_object($this->stream_entity)) {
+        if (empty($path) && is_object($this->stream_entity))
             $path = $this->stream_entity->getPath();
-            return array_key_exists(
-                $this->fullyQualified($path),
-                $this->stream_overrides
-            );
-        }
-        return false;
+
+        if (empty($path))
+            return false;
+
+        return array_key_exists(
+            $this->fullyQualified($path),
+            $this->stream_overrides
+        );
     }
 
     private function getResource(&$path)
