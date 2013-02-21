@@ -3,11 +3,11 @@ namespace Respect\Test;
 
 use Respect\Test\StreamWrapper\StreamWrapperDelegate;
 use Respect\Test\StreamWrapper\StreamEntity\FileStreamEntity;
-use Exception, ReflectionObject;
+use Exception, InvalidArgumentException, ReflectionObject;
 
 class StreamWrapper
 {
-    protected static $wrapper,
+    protected static $wrapper = null,
                      $methods = array();
 
     public static function releaseOverrides()
@@ -42,6 +42,7 @@ class StreamWrapper
         }
         return $payload;
     }
+
     private static function interfacePrep()
     {
         if (empty(static::$methods)) {
@@ -72,7 +73,7 @@ class StreamWrapper
 
     public function __call($method, $arguments)
     {
-        if (!isset(static::$wrapper))
+        if (is_null(static::$wrapper))
             throw new Exception('First inject stream overrides.');
         return $this->delegate($method, $arguments);
     }
