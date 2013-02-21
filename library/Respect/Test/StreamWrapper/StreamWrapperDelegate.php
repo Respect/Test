@@ -154,7 +154,9 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     public function stream_stat()
     {
-        return $this->statOut(fstat($this->resource));
+        if (is_object($this->stream_entity))
+            return $this->stream_entity->getStat();
+        return fstat($this->resource);
     }
 
     public function stream_read($length)
@@ -165,13 +167,6 @@ class StreamWrapperDelegate implements StreamWrapperInterface
     public function stream_eof()
     {
         return feof($this->resource);
-    }
-
-    public function statOut($stat)
-    {
-        if ($this->isOverride($path) && $this->stream_entity)
-            return $this->stream_entity->getStat($stat);
-        return $stat;
     }
 
     public function url_stat($path, $flags)
