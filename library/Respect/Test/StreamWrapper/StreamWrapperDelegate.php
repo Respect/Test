@@ -209,6 +209,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
                 return rtrim(fgets($this->resource, 1024)) ?: false;
             else
                 return false;
+
         return is_resource($this->resource)
             ? readdir($this->resource)
             : $this->resource;
@@ -217,7 +218,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
     public function dir_rewinddir()
     {
         if ($this->isOverride())
-            $this->stream_seek(0);
+            fseek($this->resource, 0, SEEK_SET);
         elseif (is_resource($this->resource))
             rewinddir($this->resource);
     }
