@@ -1,6 +1,7 @@
 <?php
 namespace Respect\Test\StreamWrapper\StreamEntity;
 
+use Exception;
 /**
  * @covers Respect\Test\StreamWrapper\StreamEntity\StreamEntity
  */
@@ -57,11 +58,20 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testCloseResource()
     {
-        $expected = '';
-        $result = $this->object->closeResource();
-        $this->assertEquals($expected, $result);
-        $this->assertTrue(true);
-        $this->assertFalse(false);
+        $this->assertNull($this->object->getResource());
+        $this->object->openResource();
+        $this->assertNotNull($this->object->getResource());
+        $this->object->closeResource();
+        $this->assertNull($this->object->getResource());
+    }
+
+    /**
+     * @covers Respect\Test\StreamWrapper\StreamEntity\StreamEntity::closeResource
+     * @expectedException Exception
+     */
+    public function testCloseResourceExcept()
+    {
+        $this->object->closeResource();
     }
 
     /**
