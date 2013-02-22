@@ -387,13 +387,13 @@ resources as before.
 
 ```php
 
-array (
-  0 => '.',
-  1 => '..',
-  2 => 'bootstrap.php',
-  3 => 'library',
-  4 => 'phpunit.xml',
-)
+    array (
+      0 => '.',
+      1 => '..',
+      2 => 'bootstrap.php',
+      3 => 'library',
+      4 => 'phpunit.xml',
+    )
 ```
 
 ```php
