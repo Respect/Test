@@ -82,7 +82,7 @@ class StreamWrapperAcceptanceTest extends \PHPUnit_Framework_TestCase
                 $expected = sprintf('%o', $dir->getPermissions());
                 $result = substr(sprintf('%o', $it->getPerms()), -3);
                 $this->assertEquals($expected, $result);
-                $path = $item->getPath() .DIRECTORY_SEPARATOR . $item->getBasename();
+                $path = $item->getPath() . DIRECTORY_SEPARATOR . $item->getBasename();
             }
             $cnt++;
         }
