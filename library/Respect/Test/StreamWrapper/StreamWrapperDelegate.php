@@ -144,7 +144,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     private function stepBackRebuildDirectories($path) {
         do
-            $last_chunk = strrchr($path, DIRECTORY_SEPARATOR);
+            $last_chunk = strrchr($path, '/');
         while ($path && !is_dir($path = preg_replace("#$last_chunk$#", '', $path)));
         unlink($path);
         mkdir($path);
@@ -262,8 +262,8 @@ class StreamWrapperDelegate implements StreamWrapperInterface
     {
         $dlist = array();
         foreach(array_keys($this->stream_overrides) as $v)
-            if ($v != $t = str_replace($path.DIRECTORY_SEPARATOR, '', $v))
-                $dlist[$v = str_replace(strchr($t, DIRECTORY_SEPARATOR), '', $t)] = $v;
+            if ($v != $t = str_replace("$path/", '', $v))
+                $dlist[$v = str_replace(strchr($t, '/'), '', $t)] = $v;
         return $dlist;
     }
 
@@ -286,7 +286,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
         $this->stream_overrides[$dir_entity->getPath()] = $dir_entity;
         foreach ($overrides as $v)
             if (false === strpos($v, '.'))
-                mkdir($path.DIRECTORY_SEPARATOR.$v);
+                mkdir("$path/$v");
         return true;
     }
 
