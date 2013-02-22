@@ -6,17 +6,18 @@ namespace Respect\Test;
  */
 class StreamWrapperVerboseTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @covers Respect\Test\StreamWrapperVerbose::__call
      */
     public function test__call()
     {
-        StreamWrapper::setStreamOverrides(array(
-            'virtual/foo-bar-baz.ini' => "foo=bar\nbaz=bat",
-            'virtual/happy-panda.ini' => "panda=happy\nhappy=panda",
-        ));
-        $this->assertTrue(is_dir('virtual'));
-        $this->assertTrue(file_exists('virtual/happy-panda.ini'));
-        $this->assertEquals("foo=bar\nbaz=bat", file_get_contents('virtual/foo-bar-baz.ini'));
+        ob_start();
+        StreamWrapperVerbose::setStreamOverrides(array());
+        StreamWrapperVerbose::releaseOverrides();
+        $out = ob_get_clean();
+        $this->assertNotEquals(false, $out);
+        $this->assertContains('dir_closedir', $out);
     }
+
 }
