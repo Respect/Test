@@ -152,7 +152,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     public function stream_open($path, $mode, $options, &$opened_path)
     {
-        if (!file_exists($path))
+        if (!file_exists($this->fullyQualified($path)))
             return $this->openNewFile($path, $mode, $options, $opened_path);
 
         if (false !== ($res = $this->getResource($path))) {
