@@ -16,8 +16,8 @@
     <email>github@jigsoft.co.za</email>
     <active>yes</active>
   </lead>
-  <date>2013-02-10</date>
-  <time>01:10:51</time>
+  <date>2013-02-22</date>
+  <time>02:06:15</time>
   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>
@@ -30,8 +30,28 @@
   <notes>-</notes>
   <contents>
     <dir name="/">
-      <file name="tests/bootstrap.php" role="test" md5sum="93503ceed4cc54a2a52fd7c73d040f58"/>
-      <file name="tests/phpunit.xml" role="test" md5sum="5c7a76de96df011d2e0a92028104a23b"/>
+      <file name="tests/bootstrap.php" role="test" md5sum="05c1148d866258f623b99d2740e439e7"/>
+      <file name="tests/library/Respect/Test/StreamWrapper/StreamEntity/DirectoryStreamEntityTest.php" role="test" md5sum="281083e1945fcb93a157b2ef141bd04c"/>
+      <file name="tests/library/Respect/Test/StreamWrapper/StreamEntity/FileStreamEntityTest.php" role="test" md5sum="643106e611882b6fcbc138e8d9a511a8"/>
+      <file name="tests/library/Respect/Test/StreamWrapper/StreamEntity/StreamEntityTest.php" role="test" md5sum="4f05651147662546c0df7e076383a766"/>
+      <file name="tests/library/Respect/Test/StreamWrapper/StreamWrapperDelegateTest.php" role="test" md5sum="9a03039844f76ff78c47344977b23e7a"/>
+      <file name="tests/library/Respect/Test/StreamWrapperAcceptanceTest.php" role="test" md5sum="420bc3ebf44dfe03e7367475fcea86dc"/>
+      <file name="tests/library/Respect/Test/StreamWrapperTest.php" role="test" md5sum="a36b69b48cb6a26c42e47bc19a7facbd"/>
+      <file name="tests/library/Respect/Test/StreamWrapperVerboseTest.php" role="test" md5sum="7d066ac5ba99b3c03d3d9eeeb6d41c65"/>
+      <file name="tests/phpunit.xml" role="test" md5sum="2733544f68e28c9cac704cee59e166d8"/>
+      <file name="library/Respect/Test/Reflect.php" role="php" md5sum="42e2517b96d027ac1b07a455cf4b7b84"/>
+      <file name="library/Respect/Test/Reflection/AbstractReflectable.php" role="php" md5sum="8afa7c60c0c82af889f9256fdb06428c"/>
+      <file name="library/Respect/Test/Reflection/Reflectable.php" role="php" md5sum="b1c26ffe1b87fa4f9cbec45a1430a8f8"/>
+      <file name="library/Respect/Test/Reflection/ReflectClass.php" role="php" md5sum="cd68cbca610a42dbf26fb8d0aa721df7"/>
+      <file name="library/Respect/Test/Reflection/ReflectionFactory.php" role="php" md5sum="d7a62d5db11d34a830fa5c33298d1645"/>
+      <file name="library/Respect/Test/Reflection/ReflectObject.php" role="php" md5sum="c8ef7514645bb3dbac1ca6fd7aff3ece"/>
+      <file name="library/Respect/Test/StreamWrapper/StreamEntity/DirectoryStreamEntity.php" role="php" md5sum="e7508adf5f466aa4995d7ba77d44ef70"/>
+      <file name="library/Respect/Test/StreamWrapper/StreamEntity/FileStreamEntity.php" role="php" md5sum="295cff750cfb650aa140cd20aa525ef3"/>
+      <file name="library/Respect/Test/StreamWrapper/StreamEntity/StreamEntity.php" role="php" md5sum="95ab5804971f002176afd240af6d8afc"/>
+      <file name="library/Respect/Test/StreamWrapper/StreamWrapperDelegate.php" role="php" md5sum="9f3395896eb67fb3c3dad4982ad33d15"/>
+      <file name="library/Respect/Test/StreamWrapper/StreamWrapperInterface.php" role="php" md5sum="e6200931ca6e2abc58131e257e8ba4b3"/>
+      <file name="library/Respect/Test/StreamWrapper.php" role="php" md5sum="8ba6ba71b5bac38285a4f6bd811dbd3d"/>
+      <file name="library/Respect/Test/StreamWrapperVerbose.php" role="php" md5sum="df9f2faba44ef6c3615df93790ce72f5"/>
     </dir>
   </contents>
   <dependencies>
@@ -47,7 +67,27 @@
   <phprelease>
     <filelist>
       <install name="tests/bootstrap.php" as="bootstrap.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapper/StreamEntity/DirectoryStreamEntityTest.php" as="library/Respect/Test/StreamWrapper/StreamEntity/DirectoryStreamEntityTest.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapper/StreamEntity/FileStreamEntityTest.php" as="library/Respect/Test/StreamWrapper/StreamEntity/FileStreamEntityTest.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapper/StreamEntity/StreamEntityTest.php" as="library/Respect/Test/StreamWrapper/StreamEntity/StreamEntityTest.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapper/StreamWrapperDelegateTest.php" as="library/Respect/Test/StreamWrapper/StreamWrapperDelegateTest.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapperAcceptanceTest.php" as="library/Respect/Test/StreamWrapperAcceptanceTest.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapperTest.php" as="library/Respect/Test/StreamWrapperTest.php"/>
+      <install name="tests/library/Respect/Test/StreamWrapperVerboseTest.php" as="library/Respect/Test/StreamWrapperVerboseTest.php"/>
       <install name="tests/phpunit.xml" as="phpunit.xml"/>
+      <install name="library/Respect/Test/Reflect.php" as="Respect/Test/Reflect.php"/>
+      <install name="library/Respect/Test/Reflection/AbstractReflectable.php" as="Respect/Test/Reflection/AbstractReflectable.php"/>
+      <install name="library/Respect/Test/Reflection/Reflectable.php" as="Respect/Test/Reflection/Reflectable.php"/>
+      <install name="library/Respect/Test/Reflection/ReflectClass.php" as="Respect/Test/Reflection/ReflectClass.php"/>
+      <install name="library/Respect/Test/Reflection/ReflectionFactory.php" as="Respect/Test/Reflection/ReflectionFactory.php"/>
+      <install name="library/Respect/Test/Reflection/ReflectObject.php" as="Respect/Test/Reflection/ReflectObject.php"/>
+      <install name="library/Respect/Test/StreamWrapper/StreamEntity/DirectoryStreamEntity.php" as="Respect/Test/StreamWrapper/StreamEntity/DirectoryStreamEntity.php"/>
+      <install name="library/Respect/Test/StreamWrapper/StreamEntity/FileStreamEntity.php" as="Respect/Test/StreamWrapper/StreamEntity/FileStreamEntity.php"/>
+      <install name="library/Respect/Test/StreamWrapper/StreamEntity/StreamEntity.php" as="Respect/Test/StreamWrapper/StreamEntity/StreamEntity.php"/>
+      <install name="library/Respect/Test/StreamWrapper/StreamWrapperDelegate.php" as="Respect/Test/StreamWrapper/StreamWrapperDelegate.php"/>
+      <install name="library/Respect/Test/StreamWrapper/StreamWrapperInterface.php" as="Respect/Test/StreamWrapper/StreamWrapperInterface.php"/>
+      <install name="library/Respect/Test/StreamWrapper.php" as="Respect/Test/StreamWrapper.php"/>
+      <install name="library/Respect/Test/StreamWrapperVerbose.php" as="Respect/Test/StreamWrapperVerbose.php"/>
     </filelist>
   </phprelease>
 </package>
