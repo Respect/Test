@@ -115,14 +115,7 @@ abstract class StreamEntity
 
     public function setPath($path)
     {
-        $path = rtrim($path, DIRECTORY_SEPARATOR);
-        if ($path && $path{0} != DIRECTORY_SEPARATOR)
-            if ($path{0} == '~' && array_key_exists('HOME',$_SERVER))
-                $this->path = str_replace('~', $_SERVER['HOME'], $path);
-            else
-                $this->path = getcwd().DIRECTORY_SEPARATOR.$path;
-        else
-            $this->path = $path;
+        $this->path = $path;
     }
 
     public function getPath()

@@ -173,17 +173,9 @@ class StreamEntityTest extends \PHPUnit_Framework_TestCase
     public function testSetPath()
     {
         $this->assertNull($this->object->getPath());
-        $expected = getcwd().DIRECTORY_SEPARATOR.'panda';
         $path = 'panda';
         $this->object->setPath($path);
-        $this->assertEquals($expected, $this->object->getPath());
-        $expected = $_SERVER['HOME'].DIRECTORY_SEPARATOR.'panda';
-        $path = '~/panda';
-        $this->object->setPath($path);
-        $this->assertEquals($expected, $this->object->getPath());
-        $expected = $path = '/panda';
-        $this->object->setPath($path);
-        $this->assertEquals($expected, $this->object->getPath());
+        $this->assertEquals($path, $this->object->getPath());
     }
 
     /**
