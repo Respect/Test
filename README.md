@@ -16,6 +16,180 @@ As more items are included this document will take shape, eventually
 seeing this paragraph disappear along with the whitespace. Feel free
 to become part of yet another awesome project at Respect.
 
+## Reflect
+
+Access properties of classes or objects without the fuss, `Reflect`
+makes it transparent wheather you are accessing or changing properties
+for a class or an object or whether these properties are static or
+not or whether they are public, prvate or protected. It's all the same.
+
+Example class and object instance:
+
+```php
+
+    use Respect\Test\Reflect;
+
+    class HappyPanda
+    {
+        private $p = 'private';
+        protected $pr = 'protected';
+        public $pu = 'public';
+    }
+
+    $hp = new HappPanda();
+
+```
+
+### Reflect::on
+
+To get an instance of the `Respect\Test\Reflect' helper call the static
+`on` methoud and supply either a object or a string class name.
+
+```php
+
+    $reflect = Reflect::on($hp);
+
+    /** or */
+
+    $reflect = Reflect::on('HappyPanda');
+
+```
+
+### getProperty($name)
+
+The `getProperty` method will return the value of the named property.
+
+```php
+
+    echo $reflect->getProperty('pu');
+
+    // public
+
+```
+
+But due to fluent interface design to get a property from our `HappyPanda`
+using the instance object simply write a one liner.
+
+```php
+
+    echo Reflect::on($hp)->getProperty('p');
+
+    // private
+
+```
+
+We can do exactly the same with only the class name.
+
+```php
+
+    echo Reflect::on('HappyPanda')->getProperty('pr');
+
+    // protected
+
+```
+
+### setProperty($name, $value)
+
+So you wath to change a property this is what testing is all about.
+
+```php
+
+    $reflect->setProperty('pu', 1234);
+    echo $reflect->getProperty('pu');
+
+    // 1234
+
+```
+
+Or through the magic of chaining feel free to combine it all again on a
+single line.
+
+```php
+
+    echo Reflect::on($hp)->setProperty('p', 'owned')->getProperty('p');
+
+    // owned
+
+```
+
+We can do exactly the same with only the class name.
+
+```php
+
+    echo Reflect::on('HappyPanda')->setProperty('pu', 'easy')->getProperty('pr');
+
+    // easy
+
+```
+
+### getInstance()
+
+As you may well know we need an instance (object) to modify these
+instance properties so it makes sense that you might want to get
+that instance itself back eventually. It doesn't matter if your
+class has no constructor, constructor with required parameters or
+whether it is marked private or protected, `Reflect` will see to it
+that you get an instance back no matter what it takes.
+
+Lets look at a new class definition with a private constructor that
+requires 2 non-optional parameters. We also load it up with some static
+properties but to us that is all the same now.
+
+```php
+
+    class Panda
+    {
+        private $p = 'private';
+        protected $pr;
+        public $pu;
+        private static $ps;
+        protected static $prs;
+        public static $pus;
+
+        private function __construct($a, $b)
+        {
+        }
+    }
+
+```
+
+Utilizing the fulent interface to the makimum!
+
+```php
+
+    $object = Reflect::on('Panda')
+        ->setProperty('p', 1)
+        ->setProperty('pr', 2)
+        ->setProperty('pu', 3)
+        ->setProperty('ps', 4)
+        ->setProperty('prs',5)
+        ->setProperty('pus',6)
+        ->getInstance();
+
+```
+
+That will leave you with a new instance of class `Panda` with each
+and every property changed, assigned to the variable $object. Looks
+something like this:
+
+```php
+
+    class Panda
+    {
+        private $p = 1;
+        protected $pr = 2;
+        public $pu = 3;
+        private static $ps = 4;
+        protected static $prs = 5;
+        public static $pus = 6;
+
+        private function __construct($a, $b)
+        {
+        }
+    }
+
+```
+
 ## StreamWrapper
 
 The PHP manual says to take note:
