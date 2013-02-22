@@ -1,11 +1,11 @@
-#Test - the Project
+# Test - the Project
 
 ## Introduction
 
 As the name suggests, this is where we make unit testing awesome.
-Often case we require specific platforms or sytems in place and
+Often case we require specific platforms or systems in place and
 our tasks are not completed in isolation. Frequently the pure task
-of writing Mocks, Monkey patching, polyfills and shims are more
+of writing Mocks, Monkey patching, poly fills and shims are more
 troublesome than the work they aim to test.
 
 To simplify our testing routines these tools came to be, now you
@@ -13,15 +13,16 @@ too can benefit from these labours and have an inside look at why
 we think tests are so cool.
 
 As more items are included this document will take shape, eventually
-seeing this paragraph disappear along with the whitespace. Feel free
+seeing this paragraph disappear along with the white space. Feel free
 to become part of yet another awesome project at Respect.
 
 ## Reflect
 
 Access properties of classes or objects without the fuss, `Reflect`
-makes it transparent wheather you are accessing or changing properties
+makes it transparent whether you are accessing or changing properties
 for a class or an object or whether these properties are static or
-not or whether they are public, prvate or protected. It's all the same.
+instance variables, whether they are public, private or protected.
+It's all the same for us.
 
 Example class and object instance:
 
@@ -42,8 +43,8 @@ Example class and object instance:
 
 ### Reflect::on
 
-To get an instance of the `Respect\Test\Reflect' helper call the static
-`on` methoud and supply either a object or a string class name.
+To get an instance of the `Respect\Test\Reflect` helper call the static
+`on` methoud and supply either an object or a string as class name.
 
 ```php
 
@@ -68,7 +69,7 @@ The `getProperty` method will return the value of the named property.
 ```
 
 But due to fluent interface design to get a property from our `HappyPanda`
-using the instance object simply write a one liner.
+using the instance object simply write a one-liner.
 
 ```php
 
@@ -90,7 +91,7 @@ We can do exactly the same with only the class name.
 
 ### setProperty($name, $value)
 
-So you wath to change a property this is what testing is all about.
+So you want to change a property, do you? Why this is what testing is all about.
 
 ```php
 
@@ -101,8 +102,8 @@ So you wath to change a property this is what testing is all about.
 
 ```
 
-Or through the magic of chaining feel free to combine it all again on a
-single line.
+Or through the magic of chaining giving you the freedom to combine it all
+on a single line once again.
 
 ```php
 
@@ -112,7 +113,7 @@ single line.
 
 ```
 
-We can do exactly the same with only the class name.
+We can do exactly the same with only the class name, what did I tell you.
 
 ```php
 
@@ -153,7 +154,7 @@ properties but to us that is all the same now.
 
 ```
 
-Utilizing the fulent interface to the makimum!
+Utilising the fluent interface to the maximum!
 
 ```php
 
@@ -192,54 +193,54 @@ something like this:
 
 ## StreamWrapper
 
-The PHP manual says to take note:
+The PHP manual says, [about the StreamWrapper](http://www.php.net/manual/en/class.streamwrapper.php), to take note:
 
 > This is NOT a real class, only a prototype of how a class
 defining its own protocol should be.
 
-Ever wondered to yourself, wouldn't it have been easier to just
-have this *real* class instead? Well so did we and here it is,
+If you also agree, that sucks. Wouldn't it be so much easier to
+just have this *real* class instead? Well so did we and here it is,
 **StreamWrapper**, by no other name.
 
-Batling with an unwielding interface, sparsely documented with
-a very specific set of implementations heavely intertwined into
-every aspect of the PHP interpreter. Those days are finaly over.
+Battling with an unwieldy interface, sparsely documented with
+a very specific set of implementations heavily intertwined into
+every aspect of the PHP interpreter. Those days are finally over.
 
-**Struggle free, seemles integration with the built-in defalut
-stream wrapper** (`file://`) to use as filesystem mock in your tests
-without the anymore tears. Create, madify, move, delete, link to,
-do whatever you need from the convenienge of the default data protocol
-complete synergy with its physical counterpart, you won't be abele
+**Struggle free, seamless integration with the built-in default
+stream wrapper** (`file://`) to use as file system mock in your tests
+without anymore tears. Create, modify, move, delete, link to,
+do whatever you need from the convenience of the default data protocol
+complete synergy with its physical counterparts, you won't be able
 to tell them apart.
 
-If that's not enoughl, how about:
+If that's not cool enough already, how about:
 
-* confiugarble wirtual files with data from PHP string variables.
+* configurable virtual files with data from PHP string variables.
 * read write seek virtual files indistinguishable from the real thing.
 * no path restriction we will fill in the directories for you.
-* accurately use standard stat functionalityl like verify existance,
-query type, open resources for reading, writing, ammending, even add
+* accurately use standard stat functionality like verify existence,
+query type, open resources for reading, writing, amending, even add
 virtual files to existing folders.
-* zero configuration self managed, no need for you to da a thing.
+* zero configuration self managed, no need for you to do a thing.
 * zero maintenance as it cleans up after itself.
-* minimum overhead as it only interferes wint that which yau want it to
+* minimum overhead as it only interferes where it's intended
 * so easy to use you'll forget its even there.
 
-The list can go on and on aand on but you can see for yoursef.
+The list can go on and on and on but you should rather see for yourself.
 
 ## How to use StreamWrapper
 
 Simply add the library to your include path, configure a few files (or
-add no files at all) to inject into the virtual filesystem and we're done .
+add no files at all) to inject into the virtual file system and we're done .
 
-**The rest is taket care of for you.**
+**The rest is taken care of for you.**
 
 We aimed for a simple design and the result, an interface of **two methods**.
 
-### Intecface method 1
+### StreamWrapper::setStreamOverrides($virtual_fs)
 
 The first available method `setStreamOverrides` allows you the option to
-configure a startup filesystem by mapping `path` to `contents`.
+configure a start up file system by mapping `path` to `contents`.
 
 The file contents can be as simple as a string or as complicated as
 mapping a complete resource as content provider.
@@ -258,12 +259,14 @@ mapping a complete resource as content provider.
 
 ```
 
-StreamWrapper takes care of its own business so you dan't have to.
+StreamWrapper takes care of its own business so you don't have to.
 
 Once the PHP script runs its course StreamWrapper will free its resources
-and gracefully perish on exit. Nothing else is needed from you.
+and gracefully perish on exit.
 
-To enable a bare bone wirtual filesystem with no startup files
+Nothing else is needed from you.
+
+To enable a bare bone virtual file system with no start up files
 simply use an empty array.
 
 ```php
@@ -272,21 +275,21 @@ simply use an empty array.
 
 ```
 
-You can keep repeating this process and everytime StreamWrapper will purge
-the current state and present you with the newly configured filesystem while
+You can keep repeating this process and every time StreamWrapper will purge
+the current state and present you with the newly configured file system while
 ensuring the proper release of resources we used before.
 
-Before we talk about the next and final **Interface method 2** lets have a quick
-see at what we've got.
+Before we talk about the next and final **Interface method # 2** lets have a quick
+look see at what we've got.
 
 ### I/O as per usual
 
-Additional virtual item can be created with favourite PHP [filesystem](http://www.php.net/manual/en/book.filesystem.php)
+Additional virtual item can be created with your favourite PHP [filesystem](http://www.php.net/manual/en/book.filesystem.php)
 functions for example `mkdir` to create new directories or `file_put_contents`
 to populate new files.
 
-To create a new textfile with the string `The file will be created and accessible
-at any location` as content at: `it/doesnt/matter/if/path/not/exist.txt` relatiive
+To create a new text file with the string `"The file will be created and accessible
+at any location"` as content at: `it/doesnt/matter/if/path/not/exist.txt` relative
 to the current working directory.
 
 ```php
@@ -307,7 +310,9 @@ to the current working directory.
 
 ```
 
-But you also get all the directories, fully traversable, inbetween.
+But you also get all the directories, fully traversable, in between.
+
+Lets try this simple recursion:
 
 ```php
 
@@ -315,17 +320,17 @@ But you also get all the directories, fully traversable, inbetween.
         echo "$path \$\n":
         foreach (new DirectoryIterator($path) as $i) {
             echo $i->getBasename(), PHP_EOL;
-            if (!$i->isDot())
-                if ($i->isDir())
-                    traverse($i->getPathname());
-                else
-                    break;
+            if ($i->isDir())
+                traverse($i->getPathname());
+            else
+                break;
         }
     }
 
     traverse('it');
 
 ```
+See what do we get?
 
 ```
 
@@ -376,25 +381,19 @@ resources as before.
 
 ```php
 
-    var_dump(scandir('tests'));
+    var_export(scandir('tests'));
 
 ```
 
-```
+```php
 
-    array(5) {
-      [0] =>
-      string(1) "."
-      [1] =>
-      string(2) ".."
-      [2] =>
-      string(13) "bootstrap.php"
-      [3] =>
-      string(7) "library"
-      [4] =>
-      string(11) "phpunit.xml"
-    }
-
+array (
+  0 => '.',
+  1 => '..',
+  2 => 'bootstrap.php',
+  3 => 'library',
+  4 => 'phpunit.xml',
+)
 ```
 
 ```php
@@ -412,10 +411,10 @@ resources as before.
     ....
 
 ```
-### Interface method 2
+### StreamWrapper::releaseOverrides()
 
-There may come a time that you want to switch back to normality
-after a session in virtual land and this is what the methoi
+There may come a time when you want to switch back to normality
+after a session in virtual land and this is what the method
 `releaseOverrides` are for.
 
 ```php
@@ -442,13 +441,13 @@ But this is not a requirement, all things will go back to normal once more.
 ## Disclaimer
 
 This source is hot of the press and even though it has worked, active
-development may agait cause some sparks to fly. We certainly haven't
-traversed all edge case and it is plausable you may find bugs yet descovered.
+development may again cause some sparks to fly. We certainly haven't
+explored all edge cases and it is plausible you may find bugs yet undiscovered.
 
-If you've read this far you know you found found the holy grail, its true.
+If you've read this far you know you found the holy grail of testing, its true.
 
 Please help us by reporting any problems or making suggestions where it
-does not yet do precisely what you want it te de. There si no better time to
-bring these ideas to the table and see them realized.
+does not yet do precisely what you want it to do. There is no better time to
+bring these ideas to the table and see them realize.
 
-Issues and pull requests are now accepted...
+Issues and pull requests are now being accepted...
