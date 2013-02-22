@@ -18,29 +18,9 @@ class StreamWrapper
     public static function setStreamOverrides(array $overrides)
     {
         static::releaseOverrides();
-        $overrides = static::prepareOverrides($overrides);
         static::$wrapper = new StreamWrapperDelegate($overrides, get_called_class());
         static::interfacePrep();
         mkdir(getcwd());
-    }
-
-    private static function prepareOverrides(array $overrides)
-    {
-        $payload = array();
-        foreach ($overrides as $path => $data) {
-            $e = new FileStreamEntity();
-            $e->setPath($path);
-            if (is_resource($data)) {
-                $e->setResource($data);
-                $e->setOpen(true);
-            }
-            else {
-                $e->setData($data);
-                $e->openResource();
-            }
-            $payload[$e->getPath()] = $e;
-        }
-        return $payload;
     }
 
     private static function interfacePrep()

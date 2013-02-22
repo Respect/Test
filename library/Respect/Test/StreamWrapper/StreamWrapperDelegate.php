@@ -17,7 +17,7 @@ class StreamWrapperDelegate implements StreamWrapperInterface
 
     public function __construct($overrides, $class)
     {
-        $this->stream_overrides = $overrides;
+        $this->stream_overrides = $this->prepareOverrides($overrides);
         $this->registered_cLass = $class;
         $this->register();
         static::$error_handler = set_error_handler(array(__CLASS__, 'errorHandler'));
@@ -33,6 +33,25 @@ class StreamWrapperDelegate implements StreamWrapperInterface
         foreach ($this->stream_overrides as $e)
             if ($e->isOpen())
                 $e->closeResource();
+    }
+
+    private function prepareOverrides(array $overrides)
+    {
+        $payload = array();
+        foreach ($overrides as $path => $data) {
+            $e = new FileStreamEntity();
+            $e->setPath($this->fullyQualified($path));
+            if (is_resource($data)) {
+                $e->setResource($data);
+                $e->setOpen(true);
+            }
+            else {
+                $e->setData($data);
+                $e->openResource();
+            }
+            $payload[$e->getPath()] = $e;
+        }
+        return $payload;
     }
 
     public static function errorHandler()
