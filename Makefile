@@ -1,9 +1,10 @@
 VERSION       = 0.1.13
-FOUNDATION_HOME = "$(shell pwd)/.foundation"
+FOUNDATION_HOME = ".foundation"
+# "$(shell pwd)/.foundation"
 CONFIG_TOOL   = "${FOUNDATION_HOME}/repo/bin/project-config.php"
 GENERATE_TOOL = "${FOUNDATION_HOME}/repo/bin/project-generate.php"
-PACKAGES_PEAR = "$(shell pear config-get php_dir)"
-SHELL        := $(shell which bash)
+PACKAGES_PEAR = pear config-get php_dir
+SHELL        := bash
 .SHELLFLAGS = -c
 
 .SILENT: ;               # no need for @
@@ -185,7 +186,7 @@ menu-deploy: .title
 # You can delete .foundation anytime and then run make foundation again if you need
 foundation: .title
 	@echo "Updating Makefile"
-	curl -LO git.io/Makefile
+	# curl -LO git.io/Makefile
 	@echo "Creating ${FOUNDATION_HOME} folder"
 	-rm -Rf "${FOUNDATION_HOME}"
 	-mkdir "${FOUNDATION_HOME}"
