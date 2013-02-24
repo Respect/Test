@@ -24,6 +24,40 @@ class ReflectClass extends  ReflectObject
                 || $constructor->getNumberOfRequiredParameters() == 0))
             return $reflector->newInstance();
 
+        if ($reflector->isAbstract()) {
+            $name = $reflector->getShortName();
+            $ns = false;
+            $abstract = $reflector->inNamespace()
+                ? 'namespace '. ($ns = $reflector->getNamespaceName()) .'; '
+                : '';
+            if (!class_exists($mockAbstract = (empty($ns) ? '' : $ns.'\\')."Mock$name")) {
+                $abstract .= "class Mock$name extends $name { ";
+                foreach (array_filter(
+                    $reflector->getMethods(),
+                    function ($v) use ($reflector) {
+                        return $v->isAbstract();
+                    }
+                 ) as $func)
+                    $abstract .= ($func->isStatic() ? ' static' : '')
+                    . ' public function '
+                    . $func->getName() . '('. implode(', ', array_map(
+                        function ($par) {
+                            return ($par->isArray() ? 'array ' : '')
+                                . ($par->isPassedByReference()? '&' : '')
+                                . '$'.$par->getName()
+                                . ($par->isDefaultValueAvailable()
+                                    ? '=' . var_export($par->getDefaultValue(), true)
+                                    : '');
+                        },
+                        $func->getParameters()
+                    )) . ') {}';
+                $abstract .= '}';
+                eval($abstract);
+            }
+            $this->reflection = $reflector = $this->reflectionInstance($mockAbstract);
+        }
+
+
         if (method_exists($reflector, 'newInstanceWithoutConstructor'))
             return $reflector->newInstanceWithoutConstructor();
 
