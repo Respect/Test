@@ -66,21 +66,21 @@ class ReflectClass extends  ReflectObject
         $defaults = $reflector->getDefaultProperties();
         $class = $reflector->getName();
 
-        $serealized = "O:" . strlen($class) . ":\"$class\":".count($props) .':{';
-        foreach ($props as $property){
-            $name = $property->getName();
-            if($property->isProtected())
+        $serial = "O:" . strlen($class) . ":\"$class\":".count($props) .':{';
+        foreach ($props as $prop) {
+            $name = $prop->getName();
+            if($prop->isProtected())
                 $name = chr(0) . '*' .chr(0) .$name;
-            elseif($property->isPrivate())
+            elseif($prop->isPrivate())
                 $name = chr(0)  . $class.  chr(0).$name;
-            $serealized .= serialize($name);
-            if(array_key_exists($property->getName(), $defaults) )
-                $serealized .= serialize($defaults[$property->getName()]);
+            $serial .= serialize($name);
+            if(array_key_exists($prop->getName(), $defaults) )
+                $serial .= serialize($defaults[$prop->getName()]);
             else
-                $serealized .= serialize(null);
+                $serial .= serialize(null);
         }
-        $serealized .="}";
-        return unserialize($serealized);
+        $serial .="}";
+        return unserialize($serial);
     }
 
     public static function hasSupport($target)
