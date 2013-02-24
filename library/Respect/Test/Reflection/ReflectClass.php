@@ -13,12 +13,13 @@ class ReflectClass extends  ReflectObject
     public function __get($name)
     {
         if ($name == 'target' && is_string($this->_target))
-            $this->_target = $this->newInstance($this->reflection);
+            $this->_target = $this->newInstance();
         return parent::__get($name);
     }
 
-    private function newInstance(ReflectionClass $reflector)
+    private function newInstance()
     {
+        $reflector = $this->reflection;
         if ($reflector->isInstantiable()
             && (is_null($constructor = $reflector->getConstructor())
                 || $constructor->getNumberOfRequiredParameters() == 0))
