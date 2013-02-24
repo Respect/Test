@@ -128,7 +128,7 @@ We can do exactly the same with only the class name, what did I tell you.
 As you may well know we need an instance (object) to modify these
 instance properties so it makes sense that you might want to get
 that instance itself back eventually. It doesn't matter if your
-class has no constructor, constructor with required parameters or
+class is abstract, has no constructor, constructor with required parameters or
 whether it is marked private or protected, `Reflect` will see to it
 that you get an instance back no matter what it takes.
 
@@ -190,6 +190,85 @@ something like this:
     }
 
 ```
+Lets turn things up a notch, how about an abstract class? When you Reflect
+on an abstract class things are a little different. We can't have an instance
+of an abstract class, its not possible. So lets see what happens.
+
+Lets make our Happy Panda abstract
+
+```
+    abstract class Panda
+    {
+        private $val = 'private';
+
+        abstract protected function eatBamboo(array $sticks=array());
+
+        private function __construct(&$a, $b)
+        {
+            $a++;
+            $this->val = $b;
+        }
+    }
+
+```
+
+We Reflect on the abstract class and retrieve the instance.
+
+```php
+
+    $object = Reflect::on('Panda')->getInstance();
+
+```
+
+Reflect will generate a Mock class for you so that you can have a valid instance
+of the abstract class to test against. The Mock class will be in the same namespace
+(if applicable) with the word "Mock" Prepended to the classname.
+
+```php
+
+    class MockPanda extends Panda
+    {
+        public function eatBamboo($sticks=array ())
+        {
+        }
+    }
+```
+
+As you can see we can get an instance of an abstract class from a private constructor
+but what if we wanted to execute that constructor? No problem just pass an array of
+the parameters you want to use to `getInstance()` and Reflect will call the private
+constructor for you. **Note:** example uses the new shorthand for arrays introduced
+in PHP 5.4 for 5.3 use `array()` instead of `[ ]`
+
+
+```php
+    echo Reflect::on('Panda')->getProperty('val');
+
+    // private
+
+    $object = Reflect::on('Panda')->getInstance([&$a, 'New Value']);
+
+    echo Reflect::on('Panda')->getProperty('val');
+
+    // New Value
+
+    echo $a;
+
+    // 1
+
+    $object = Reflect::on('Panda')->getInstance([&$a, 'New Value']);
+
+    echo $a;
+
+    // 2
+
+    $object = Reflect::on('Panda')->getInstance([&$a, 'New Value']);
+
+    echo $a;
+
+    // 3
+```
+
 
 ## StreamWrapper
 
