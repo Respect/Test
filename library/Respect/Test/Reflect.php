@@ -31,7 +31,7 @@ class Reflect
         return $this->reflection->getProperty($name);
     }
 
-    public function getInstance() {
-        return $this->reflection->getInstance();
+    public function getInstance(array $args = array()) {
+        return $this->reflection->getInstance($args);
     }
 }

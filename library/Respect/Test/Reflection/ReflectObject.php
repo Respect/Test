@@ -33,8 +33,16 @@ class ReflectObject extends  AbstractReflectable
         return is_object($target) && !($target instanceof Closure);
     }
 
-    function getInstance()
+    private function invoke($name, array $args = array())
     {
+        $method = $this->reflection->getMethod($name);
+        return $method->invokeArgs($this->target, $args);
+    }
+
+    function getInstance(array $args = array())
+    {
+        if (!empty($args))
+            $this->invoke('__construct', $args);
         return $this->target;
     }
 }

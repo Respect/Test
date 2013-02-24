@@ -7,5 +7,5 @@ interface Reflectable
     static function hasSupport($target);
     function setProperty($name, $value);
     function getProperty($name);
-    function getInstance();
+    function getInstance(array $args = array());
 }
