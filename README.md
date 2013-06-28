@@ -37,7 +37,7 @@ Example class and object instance:
         public $pu = 'public';
     }
 
-    $hp = new HappPanda();
+    $hp = new HappyPanda();
 
 ```
 
