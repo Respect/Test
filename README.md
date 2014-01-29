@@ -1,5 +1,7 @@
 # Test - the Project
 
+[![Latest Stable Version](https://poser.pugx.org/respect/test/v/stable.png)](https://packagist.org/packages/respect/test) [![Total Downloads](https://poser.pugx.org/respect/test/downloads.png)](https://packagist.org/packages/respect/test) [![Latest Unstable Version](https://poser.pugx.org/respect/test/v/unstable.png)](https://packagist.org/packages/respect/test) [![License](https://poser.pugx.org/respect/test/license.png)](https://packagist.org/packages/respect/test)
+
 ## Introduction
 
 As the name suggests, this is where we make unit testing awesome.
